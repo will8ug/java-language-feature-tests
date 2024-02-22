@@ -6,18 +6,17 @@ import java.util.function.Supplier;
 public class ConstructorMethodRef {
     /**
      * Copies elements from one collection to another.
-     * 
-     * @param sourceCollection
-     * @param collectionFactory
-     * @return
      */
     public static <T, SOURCE extends Collection<T>, DEST extends Collection<T>> DEST transferElements(
             SOURCE sourceCollection, Supplier<DEST> collectionFactory) {
-        
+        System.out.println("Coming into the transferElements()...");
+
         DEST result = collectionFactory.get();
         for (T t : sourceCollection) {
+            System.out.println("Add 1");
             result.add(t);
         }
+        System.out.println("Returning the result with size: " + result.size());
         return result;
     }
 }
