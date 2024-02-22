@@ -2,7 +2,7 @@ package net.will.javatest.basicconcept.jdk8;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Spy;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -14,9 +14,8 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class OptionalUsageTest {
-    @Spy
-    private Supplier<String> assistant = new SupplierAssistant();
-    
+    private final Supplier<String> assistant = Mockito.spy(new SupplierAssistant());
+
     @Test
     public void testIsPresent() {
         Optional<String> value = OptionalUsage.getOptionalValue(10);
@@ -49,7 +48,7 @@ public class OptionalUsageTest {
     @Test
     public void testOrElseGet_WhenIsPresent_WithLambda() {
         Optional<String> value = OptionalUsage.getOptionalValue(10);
-        assertEquals("positive", value.orElseGet(() -> createNewValue()));
+        assertEquals("positive", value.orElseGet(this::createNewValue));
     }
     
     private String createNewValue() {
