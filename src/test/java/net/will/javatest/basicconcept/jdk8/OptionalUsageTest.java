@@ -14,8 +14,6 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class OptionalUsageTest {
-    private final Supplier<String> assistant = Mockito.spy(new SupplierAssistant());
-
     @Test
     public void testIsPresent() {
         Optional<String> value = OptionalUsage.getOptionalValue(10);
@@ -32,15 +30,21 @@ public class OptionalUsageTest {
     
     @Test
     public void testOrElseGet_WhenNotPresent() {
+        Supplier<String> assistant = Mockito.spy(new SupplierAssistant());
+
         Optional<String> value = OptionalUsage.getOptionalValue(-10);
         String endValue = value.orElseGet(assistant);
+
         assertEquals("assistance", endValue);
         verify(assistant).get();
     }
     
     @Test
     public void testOrElseGet_WhenIsPresent_WithSupplier() {
+        Supplier<String> assistant = Mockito.spy(new SupplierAssistant());
+
         Optional<String> value = OptionalUsage.getOptionalValue(10);
+
         assertEquals("positive", value.orElseGet(assistant));
         verify(assistant, never()).get();
     }
