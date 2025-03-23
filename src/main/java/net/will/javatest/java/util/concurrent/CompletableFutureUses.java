@@ -161,29 +161,6 @@ public class CompletableFutureUses {
         return future;
     }
 
-    public Future<String> completeAsync() {
-        CompletableFuture<String> future = new CompletableFuture<>();
-        return future.completeAsync(() -> {
-            try {
-                TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            return "done";
-        });
-    }
-
-    public Future<Void> orTimeoutBehavior() {
-        return CompletableFuture.runAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            System.out.println("don't expect to print this");
-        }).orTimeout(500, TimeUnit.MILLISECONDS);
-    }
-
     public List<String> combineGreetings(List<String> names) {
         try (ExecutorService threeThreadsAtMostExecutor = Executors.newFixedThreadPool(3)) {
             List<CompletableFuture<String>> futureResults = new ArrayList<>();

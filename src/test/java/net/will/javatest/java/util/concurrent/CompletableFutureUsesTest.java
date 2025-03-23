@@ -105,20 +105,6 @@ public class CompletableFutureUsesTest {
     }
 
     @Test
-    public void testCompleteAsync() throws ExecutionException, InterruptedException {
-        Future<String> future = new CompletableFutureUses().completeAsync();
-
-        assertEquals("done", future.get());
-    }
-
-    @Test
-    public void testOrTimeoutBehavior() {
-        assertThrows(ExecutionException.class, () -> {
-            new CompletableFutureUses().orTimeoutBehavior().get();
-        });
-    }
-
-    @Test
     public void testCombineGreetings() {
         CompletableFutureUses obj = new CompletableFutureUses();
         List<String> result = obj.combineGreetings(Arrays.asList("Bob", "Alice", "Carol"));
