@@ -219,4 +219,24 @@ public class CompletableFutureUses {
         }
         return "Hi, " + name;
     }
+
+    public String whenComplete() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future = new CompletableFuture<>();
+        CompletableFuture<String> endFuture = future.completeAsync(() -> {
+            try {
+                TimeUnit.MILLISECONDS.sleep(30);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            return "Job done";
+        }).whenComplete((result, ex) -> {
+            if (ex == null) {
+                System.out.println(result);
+            } else {
+                System.out.println("Job failed because of " + ex.getMessage());
+            }
+        });
+
+        return endFuture.get();
+    }
 }

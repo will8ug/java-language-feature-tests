@@ -128,4 +128,13 @@ public class CompletableFutureUsesTest {
         assertTrue(result.contains("Hi, Alice"));
         assertTrue(result.contains("Hi, Carol"));
     }
+
+    @Test
+    public void testWhenComplete() throws ExecutionException, InterruptedException {
+        CompletableFutureUses obj = new CompletableFutureUses();
+
+        String result = obj.whenComplete();
+        assertNotNull(result);
+        System.out.println(result);
+    }
 }
