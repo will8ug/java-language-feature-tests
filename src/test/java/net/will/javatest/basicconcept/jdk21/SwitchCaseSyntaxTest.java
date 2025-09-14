@@ -12,4 +12,11 @@ public class SwitchCaseSyntaxTest {
         assertEquals("positive", switchCaseSyntax.identifyNumber(5));
         assertEquals("non-negative", switchCaseSyntax.identifyNumber(0));
     }
+
+    @Test
+    public void testIdentifyException() {
+        SwitchCaseSyntax obj = new SwitchCaseSyntax();
+        assertEquals("IllegalArgumentException", obj.identifyException(new IllegalArgumentException("test")));
+        assertEquals("Unknown Exception", obj.identifyException(new Exception("test")));
+    }
 }

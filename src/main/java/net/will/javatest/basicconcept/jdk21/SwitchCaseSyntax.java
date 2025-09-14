@@ -14,4 +14,14 @@ public class SwitchCaseSyntax {
         }
         return result;
     }
+
+    public String identifyException(Exception exp) {
+        return switch (exp) {
+            case IllegalArgumentException _ -> "IllegalArgumentException";
+            case IllegalStateException _ -> "IllegalStateException";
+            case IndexOutOfBoundsException _ -> "IndexOutOfBoundsException";
+            case NullPointerException _ -> "NullPointerException";
+            default -> "Unknown Exception";
+        };
+    }
 }
